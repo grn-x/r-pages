@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java Test Suite Sample Assertions</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 2rem auto;
+    background: #f9f9f9;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 12px #ccc;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .dictionary {
+    background: #eef4f7;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+  .dictionary dt {
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+  .dictionary dd {
+    margin: 0 0 0.7rem 1.5rem;
+  }
+  .challenges {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+  }
+  .challenge {
+    background: #fff;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 8px #ccc;
+  }
+  .snippet {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    margin-bottom: 0.7rem;
+    font-size: 0.9rem;
+  }
+  label {
+    font-weight: bold;
+  }
+  input[type="text"] {
+    font-family: monospace;
+    padding: 0.3rem 0.4rem;
+    margin-left: 0.3rem;
+    width: 140px;
+  }
+  button {
+    margin-left: 0.6rem;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #eee;
+  }
+  .answer {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: green;
+  }
+</style>
+</head>
+<body>
+
+<h1>Java Test Suite Sample Assertions</h1>
+
+<section style="margin-bottom: 2rem;">
+  <label for="clientName">Client Name:</label>
+  <input type="text" id="clientNameInput" placeholder="Enter name and hit Enter" />
+  <br /><br />
+  <label for="address">Address:</label>
+  <input type="text" id="addressInput" placeholder="Enter address and hit Enter" />
+</section>
+
+
+
+<section class="dictionary">
+  <h2>Assertion Methods Dictionary</h2>
+  <dl>
+    <dt>assertEquals(expected, actual)</dt>
+    <dd>Checks that two values or objects are equal (using equals method for objects). For Integers, a third delta argument is permitted, deciding the maximum difference.</dd>
+    <dt>assertNotEquals(unexpected, actual)</dt>
+    <dd>Checks that two values or objects are not equal.</dd>
+    <dt>assertTrue(condition)</dt>
+    <dd>Checks that the given boolean condition is true.</dd>
+    <dt>assertFalse(condition)</dt>
+    <dd>Checks that the given boolean condition is false.</dd>
+    <dt>assertNull(object)</dt>
+    <dd>Checks that the object is null.</dd>
+    <dt>assertNotNull(object)</dt>
+    <dd>Checks that the object is not null.</dd>
+    <dt>assertSame(expected, actual)</dt>
+    <dd>Checks that two references point to the same object.</dd>
+    <dt>assertNotSame(unexpected, actual)</dt>
+    <dd>Checks that two references do NOT point to the same object.</dd>
+    <dt>assertArrayEquals(expectedArray, actualArray)</dt>
+    <dd>Checks that two arrays are equal element-wise.</dd>
+    <dt>assertThrows(expectedException.class, executable)</dt>
+    <dd>Checks that the executable code throws the expected exception.</dd>
+  </dl>
+</section>
+
+<section class="challenges">
+
+<!-- Left side (col 1) -->
+
+<div class="challenge" id="c1">
+  <div class="snippet">
+    String s = "hello";<br />
+    assertEquals(<input type="text" id="input1" placeholder="???" />, s.length());
+  </div>
+  <label>Fill in the missing expected value:</label>
+  <button onclick="checkAnswer('input1', 'c1')">Check</button>
+  <div class="answer" id="answer1"></div>
+</div>
+
+<div class="challenge" id="c2">
+  <div class="snippet">
+    boolean active = true;<br />
+    assertTrue(<input type="text" id="input2" placeholder="???" />);
+  </div>
+  <label>Fill in the boolean condition being asserted true:</label>
+  <button onclick="checkAnswer('input2', 'c2')">Check</button>
+  <div class="answer" id="answer2"></div>
+</div>
+
+<div class="challenge" id="c3">
+  <div class="snippet">
+    Object obj = null;<br />
+    assertNull(<input type="text" id="input3" placeholder="???" />);
+  </div>
+  <label>Fill in the variable being tested for null:</label>
+  <button onclick="checkAnswer('input3', 'c3')">Check</button>
+  <div class="answer" id="answer3"></div>
+</div>
+
+<div class="challenge" id="c4">
+  <div class="snippet">
+    int[] arr = {1, 2, 3};<br />
+    assertEquals(<input type="text" id="input4" placeholder="???" />, arr[0]);
+  </div>
+  <label>Fill in the expected first element of the array:</label>
+  <button onclick="checkAnswer('input4', 'c4')">Check</button>
+  <div class="answer" id="answer4"></div>
+</div>
+
+<div class="challenge" id="c5">
+  <div class="snippet">
+    String name = "Alice";<br />
+    assertEquals(<input type="text" id="input5" placeholder="???" />, name.toUpperCase());
+  </div>
+  <label>Fill in the expected uppercase string:</label>
+  <button onclick="checkAnswer('input5', 'c5')">Check</button>
+  <div class="answer" id="answer5"></div>
+</div>
+
+<div class="challenge" id="c6">
+  <div class="snippet">
+    int a = 5;<br />
+    int b = 3;<br />
+    int sum = a + b;<br />
+    assertEquals(<input type="text" id="input6" placeholder="???" />, sum);
+  </div>
+  <label>Fill in the expected sum of a + b:</label>
+  <button onclick="checkAnswer('input6', 'c6')">Check</button>
+  <div class="answer" id="answer6"></div>
+</div>
+
+<div class="challenge" id="c7">
+  <div class="snippet">
+    List&lt;Integer&gt; list = Arrays.asList(10, 20, 30);<br />
+    int max = list.stream().max(Integer::compareTo).get();<br />
+    assertEquals(<input type="text" id="input7" placeholder="???" />, max);
+  </div>
+  <label>Fill in the expected max value in the list:</label>
+  <button onclick="checkAnswer('input7', 'c7')">Check</button>
+  <div class="answer" id="answer7"></div>
+</div>
+
+<div class="challenge" id="c9">
+  <div class="snippet">
+    Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();<br />
+    map.put("a", 1);<br />
+    map.put("b", 2);<br />
+    assertEquals(<input type="text" id="input9" placeholder="???" />, map.get("b"));
+  </div>
+  <label>Fill in the expected value for key "b" in the map:</label>
+  <button onclick="checkAnswer('input9', 'c9')">Check</button>
+  <div class="answer" id="answer9"></div>
+</div>
+
+<div class="challenge" id="c10">
+  <div class="snippet">
+    String s = "hello";<br />
+    String reversed = new StringBuilder(s).reverse().toString();<br />
+    assertEquals(<input type="text" id="input10" placeholder="???" />, reversed);
+  </div>
+  <label>Fill in the expected reversed string of "hello":</label>
+  <button onclick="checkAnswer('input10', 'c10')">Check</button>
+  <div class="answer" id="answer10"></div>
+</div>
+
+<!-- Right side (col 2) -->
+
+<div class="challenge" id="c1b">
+  <div class="snippet">
+    double pi = Math.PI;<br />
+    assert <input type="text" id="input1b" placeholder="method" /> (3.1415, pi, 0.0001);
+  </div>
+  <label>Fill in the assertion method to check approximate equality (with delta):</label>
+  <button onclick="checkAnswer('input1b', 'c1b')">Check</button>
+  <div class="answer" id="answer1b"></div>
+</div>
+
+<div class="challenge" id="c2b">
+  <div class="snippet">
+    String s = null;<br />
+    assert <input type="text" id="input2b" placeholder="method" /> (s);
+  </div>
+  <label>Fill in the assertion method that checks if s is null:</label>
+  <button onclick="checkAnswer('input2b', 'c2b')">Check</button>
+  <div class="answer" id="answer2b"></div>
+</div>
+
+<div class="challenge" id="c3b">
+  <div class="snippet">
+    String a = "abc";<br />
+    String b = "abc";<br />
+    assert <input type="text" id="input3b" placeholder="method" /> (a, b);
+  </div>
+  <label>Fill in the assertion method that checks two objects are the <em>same</em> reference:</label>
+  <button onclick="checkAnswer('input3b', 'c3b')">Check</button>
+  <div class="answer" id="answer3b"></div>
+</div>
+
+<div class="challenge" id="c4b">
+  <div class="snippet">
+    int[] expected = {1, 2, 3};<br />
+    int[] actual = {1, 2, 3};<br />
+    assert <input type="text" id="input4b" placeholder="method" /> (expected, actual);
+  </div>
+  <label>Fill in the assertion method that checks two arrays are equal:</label>
+  <button onclick="checkAnswer('input4b', 'c4b')">Check</button>
+  <div class="answer" id="answer4b"></div>
+</div>
+
+<div class="challenge" id="c5b">
+  <div class="snippet">
+    List&lt;String&gt; list = Arrays.asList("a", "bb", "ccc");<br />
+    long count = list.stream().filter(s -&gt; s.length() &gt; 1).count();<br />
+    assert <input type="text" id="input5b" placeholder="method" /> (2, count);
+  </div>
+  <label>Fill in the assertion method that checks equality of count value:</label>
+  <button onclick="checkAnswer('input5b', 'c5b')">Check</button>
+  <div class="answer" id="answer5b"></div>
+</div>
+
+<div class="challenge" id="c6b">
+  <div class="snippet">
+    Optional&lt;String&gt; opt = Optional.of("hello");<br />
+    assert <input type="text" id="input6b" placeholder="method" /> (true, opt.isPresent());
+  </div>
+  <label>Fill in the assertion method that checks condition is true:</label>
+  <button onclick="checkAnswer('input6b', 'c6b')">Check</button>
+  <div class="answer" id="answer6b"></div>
+</div>
+
+<div class="challenge" id="c7b">
+  <div class="snippet">
+    String s1 = new String("hello");<br />
+    String s2 = "hello";<br />
+    assert <input type="text" id="input7b" placeholder="method" /> (s1, s2);
+  </div>
+  <label>Fill in the assertion method checking <em>value</em> equality (not reference):</label>
+  <button onclick="checkAnswer('input7b', 'c7b')">Check</button>
+  <div class="answer" id="answer7b"></div>
+</div>
+
+<div class="challenge" id="c9b">
+  <div class="snippet">
+    Exception ex = null;<br />
+    try {<br />
+    &nbsp;&nbsp;int a = 5 / 0;<br />
+    } catch (ArithmeticException e) {<br />
+    &nbsp;&nbsp;ex = e;<br />
+    }<br />
+    assert <input type="text" id="input9b" placeholder="method" /> (ArithmeticException.class, () -&gt; { throw ex; });
+  </div>
+  <label>Fill in the assertion method that checks an exception is thrown:</label>
+  <button onclick="checkAnswer('input9b', 'c9b')">Check</button>
+  <div class="answer" id="answer9b"></div>
+</div>
+
+<div class="challenge" id="c10b">
+  <div class="snippet">
+    boolean isEmpty = false;<br />
+    assert <input type="text" id="input10b" placeholder="method" /> (isEmpty);
+  </div>
+  <label>Fill in the assertion method that checks boolean is false:</label>
+  <button onclick="checkAnswer('input10b', 'c10b')">Check</button>
+  <div class="answer" id="answer10b"></div>
+</div>
+
+</section>
+
+<script>
+
+  /*const correctAnswers = {
+    c1: "5",
+    c2: "active",
+    c3: "obj",
+    c4: "1",
+    c5: "\"ALICE\"",
+    c6: "8",
+    c7: "30",
+    c9: "2",
+    c10: "\"olleh\"",
+    c1b: "Equals",
+    c2b: "Null",
+    c3b: "Same",
+    c4b: "ArrayEquals",
+    c5b: "Equals",
+    c6b: "True",
+    c7b: "Equals",
+    c9b: "Throws",
+    c10b: "False"
+  };
+
+  function checkAnswer(inputId, challengeId) {
+    const userInput = document.getElementById(inputId).value.trim();
+    const answerDiv = document.getElementById("answer" + challengeId.substring(1));
+    const correctAnswer = correctAnswers[challengeId];
+
+    if (userInput === correctAnswer) {
+      answerDiv.textContent = "✅ Correct!";
+      answerDiv.style.color = "green";
+    } else {
+      answerDiv.textContent = "❌ Incorrect. Try again!";
+      answerDiv.style.color = "red";
+    }
+  }*/
+  
+  
+  /*           
+
+  async function checkAnswer(inputId, challengeId) {
+    const userInput = document.getElementById(inputId).value.trim();
+    const answerDiv = document.getElementById("answer" + challengeId.substring(1));
+
+    try {
+      const url = `http://${espIp}/assert?name=${encodeURIComponent(clientName)}&number=${encodeURIComponent(challengeId)}&param=${encodeURIComponent(userInput)}`;
+      const response = await fetch(url);
+
+      if (!response.ok) throw new Error("ESP32 responded with error");
+
+      const result = await response.json();
+
+      if (result.result === true) {
+        answerDiv.textContent = "✅ Correct!";
+        answerDiv.style.color = "green";
+      } else {
+        answerDiv.textContent = "❌ Incorrect. Try again!";
+        answerDiv.style.color = "red";
+      }
+    } catch (error) {
+      console.error("Error checking answer:", error);
+      answerDiv.textContent = "⚠️ Error contacting server.";
+      answerDiv.style.color = "orange";
+    }
+  }*/
+  
+  
+  
+  
+  const NAME_KEY = 'Q12_presentation_name';
+  const ADDRESS_KEY = 'Q12_presentation_address';
+
+  const nameInput = document.getElementById('clientNameInput');
+  const addressInput = document.getElementById('addressInput');
+
+
+  window.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem(NAME_KEY)) {
+      nameInput.value = sessionStorage.getItem(NAME_KEY);
+    }
+    if (sessionStorage.getItem(ADDRESS_KEY)) {
+      addressInput.value = sessionStorage.getItem(ADDRESS_KEY);
+    }
+  });
+
+
+  nameInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      sessionStorage.setItem(NAME_KEY, nameInput.value.trim());
+      alert('Client name saved');
+    }
+  });
+
+  addressInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      sessionStorage.setItem(ADDRESS_KEY, addressInput.value.trim());
+      alert('Address saved');
+    }
+  });
+
+
+
+  async function checkAnswer(inputId, challengeId) {
+    const userInput = document.getElementById(inputId).value.trim();
+    const answerDiv = document.getElementById("answer" + challengeId.substring(1));
+
+    const clientName = sessionStorage.getItem(NAME_KEY) || "Unknown";
+    const espIp = sessionStorage.getItem(ADDRESS_KEY) || "127.0.0.1";
+
+    try {
+      const url = `http://${espIp}/assert?name=${encodeURIComponent(clientName)}&number=${encodeURIComponent(challengeId)}&param=${encodeURIComponent(userInput)}`;
+      const response = await fetch(url);
+
+      if (!response.ok) throw new Error("ESP32 responded with error");
+
+      const result = await response.json();
+
+      if (result.result === true) {
+        answerDiv.textContent = "✅ Correct!";
+        answerDiv.style.color = "green";
+      } else {
+        answerDiv.textContent = "❌ Incorrect. Try again!";
+        answerDiv.style.color = "red";
+      }
+    } catch (error) {
+      console.error("Error checking answer:", error);
+      answerDiv.textContent = "⚠️ Error contacting server.";
+      answerDiv.style.color = "orange";
+    }
+  }
+
+</script>
+
+</script>
+
+</body>
+</html>
