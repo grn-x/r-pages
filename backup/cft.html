@@ -1,1 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advanced Interactive Debugging CTF</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem auto;
+      max-width: 1200px;
+      background: #f9f9f9;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px #ccc;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    h2 {
+      border-bottom: 2px solid #333;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+    }
+    .challenges {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .challenge {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #ccc;
+      border-left: 4px solid #007acc;
+    }
+    .challenge h3 {
+      margin-top: 0;
+      color: #007acc;
+    }
+    .snippet {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+    .hint {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      padding: 0.8rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 1rem 0 0.5rem 0;
+    }
+    input[type="text"] {
+      font-family: monospace;
+      padding: 0.5rem;
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      margin-left: 0.6rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #007acc;
+      background-color: #007acc;
+      color: white;
+    }
+    button:hover {
+      background-color: #005a9e;
+    }
+    .answer {
+      margin-top: 0.5rem;
+      font-weight: bold;
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+    .client-info {
+      background: #e8f4fd;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+    }
+    .client-info input {
+      margin: 0.5rem 0;
+      width: 250px;
+    }
+  </style>
+</head>
+<body>
+<h1>Interactive Debugging CTF</h1>
+<p>Hast du im Referat aufgepasst ????</p>
 
+<div class="client-info">
+  <label for="clientNameInput">Client Name:</label>
+  <input type="text" id="clientNameInput" placeholder="Enter your name" />
+  <label for="addressInput">ESP32 Server Address:</label>
+  <input type="text" id="addressInput" placeholder="192.168.1.100" />
+</div>
+
+<div class="challenges">
+
+
+
+
+
+  <!-- Challenge 1: Dynamic flag generation with timing -->
+  <div class="challenge">
+    <h3>Level 1: View Source</h3>
+    <div class="snippet">    function stringLiteral_1() {
+
+      return str;
+      }</div>
+    <div class="hint">💡 Open the console, or simply inspect the js source</div>
+    <label>Enter the ctf{} String you found</label>
+    <input type="text" id="input1" placeholder="Enter string" />
+    <button onclick="checkAnswer('input1', 'c1')">Check</button>
+    <div class="answer" id="answer1"></div>
+  </div>
+
+  <!-- Challenge 2: Conditional breakpoints -->
+  <div class="challenge">
+    <h3>Callstack: resemble the codeword from the letters in correct order</h3>
+    <div class="snippet">
+      //find the cyclic method calls
+
+      function letter_one() {
+      letter_two();
+      }
+      function letter_two() {
+      letter_three();
+      }
+      function letter_three() {
+      //...
+      }
+
+    </div>
+    <div class="hint">Set a breakpoint and evaluate the callstack, step if needed</div>
+    <label>Retrieve the first letters of each function call and build the codeword</label>
+    <input type="text" id="input2" placeholder="word" />
+    <button onclick="checkAnswer('input2', 'c2')">Check</button>
+    <div class="answer" id="answer2"></div>
+  </div>
+
+  <!-- Challenge 3: Call stack inspection -->
+  <div class="challenge">
+    <h3>Retrieve the number from the 'returnCallstack' method</h3>
+    <div class="snippet">    function returnCallstack(value){
+      // obtain value
+      }</div>
+    <div class="hint">💡 Set a breakpoint and examine values</div>
+    <label>Enter the value passed to the 'returnCallstack' function: </label>
+    <input type="text" id="input3" placeholder="number" />
+    <button onclick="checkAnswer('input3', 'c3')">Check</button>
+    <div class="answer" id="answer3"></div>
+  </div>
+
+  <!-- Challenge 4: Watch expressions -->
+  <div class="challenge">
+    <h3>Step-into </h3>
+    <div class="snippet">function ee_callstack(value){
+      // intervene into the cycle and extract the param
+      }</div>
+    <div class="hint">Set a breakpoint, step if needed, open the value dialog, or print using the console</div>
+    <label>Enter the value</label>
+    <input type="text" id="input4" placeholder="number" />
+    <button onclick="checkAnswer('input4', 'c4')">Check</button>
+    <div class="answer" id="answer4"></div>
+  </div>
+
+  <!-- Challenge 5: Memory inspection with closures -->
+  <div class="challenge">
+    <h3>Modify Value: How would the endresult in returnCallstack change if c_callstack was passed 468</h3>
+    <div class="snippet">    function c_callstack(value){
+      value = ((value << 3) ^ 0x5A) + ((value >>> 2) & 0x3F);
+      value = ((value | 0xCAFEBABE) & 0x12345678) ^ ((value << 5) - 0x42);
+
+      r_callstack(value);
+      }</div>
+    <div class="hint">💡Set multiple breakpoints, use the console, or edit the value directly </div>
+    <label>Enter the resulting number:</label>
+    <input type="text" id="input5" placeholder="Number" />
+    <button onclick="checkAnswer('input5', 'c5')">Check</button>
+    <div class="answer" id="answer5"></div>
+  </div>
+
+
+
+  <script>
+    //Examples:
+
+    function breakpoint(){
+      const initial = 42;
+
+      const val1 = stepOver(initial);
+      const val2 = stepInto(val1);
+
+    }
+
+    function stepOver(param){
+        const str = "This is a string";
+        const returns = param%5;
+        // Step over this line to continue
+      return returns;
+    }
+
+    function stepInto(param) {
+      const obj = { key: "value" };
+      const value = param * 2;
+
+      return nestedFunction(value);
+    }
+
+    function nestedFunction(param) {
+      const nestedValue = "Nested Value";
+
+      return param+69;
+    }
+
+    setInterval(() => {
+      breakpoint();
+    }, 2000);
+
+
+
+    const NAME_KEY = 'Q12_presentation_name';
+    const ADDRESS_KEY = 'Q12_presentation_address';
+
+    const nameInput = document.getElementById('clientNameInput');
+    const addressInput = document.getElementById('addressInput');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem(NAME_KEY)) {
+        nameInput.value = sessionStorage.getItem(NAME_KEY);
+      }
+      if (sessionStorage.getItem(ADDRESS_KEY)) {
+        addressInput.value = sessionStorage.getItem(ADDRESS_KEY);
+      }
+
+      //startChallenges();
+    });
+
+    nameInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        sessionStorage.setItem(NAME_KEY, nameInput.value.trim());
+        alert('Client name saved');
+      }
+    });
+
+    addressInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        sessionStorage.setItem(ADDRESS_KEY, addressInput.value.trim());
+        alert('Address saved');
+      }
+    });
+
+
+    const correctAnswersDebug = {
+      c1: "cft{solution_one}",
+      c2: "secret",
+      c3: "552575653",
+      c4: "227086596",
+      c5: "320200509"
+    };
+
+    async function checkAnswer(inputId, challengeId) {
+      const userInput = document.getElementById(inputId).value.trim();
+      const answerDiv = document.getElementById("answer" + challengeId.substring(1));
+
+      if (!userInput) {
+        answerDiv.textContent = "⚠️ Please enter an answer!";
+        answerDiv.style.color = "orange";
+        answerDiv.style.backgroundColor = "#fff3cd";
+        return;
+      }
+
+      const correctAnswer = correctAnswersDebug[challengeId];
+
+      if (correctAnswer) {
+        if (userInput === correctAnswer) {
+          answerDiv.textContent = "✅ Correct! Well done!";
+          answerDiv.style.color = "white";
+          answerDiv.style.backgroundColor = "green";
+        } else {
+          answerDiv.textContent = "❌ Incorrect. Try again!";
+          answerDiv.style.color = "white";
+          answerDiv.style.backgroundColor = "red";
+        }
+      } else {
+        answerDiv.textContent = "⚠️ Challenge ID not found!";
+        answerDiv.style.color = "orange";
+        answerDiv.style.backgroundColor = "#fff3cd";
+      }
+    }
+
+
+
+    function invocationOrigin() {
+      s_callstack(3);
+      stringLiteral_1();
+
+    }
+
+    setInterval(() =>{
+      invocationOrigin();
+    }, 2000);
+
+
+
+    var callCounter = 0;
+    function stringLiteral_1() {
+      const str = "cft{solution_one}";
+      if( callCounter++ % 4 === 0) {
+        console.log(str);
+        callCounter = 0;
+      }
+      return str;
+    }
+
+
+
+    function returnCallstack(value){
+      //console.log("Callstack value:", value);
+    }
+
+    function c_callstack(value){
+      value = ((value << 3) ^ 0x5A) + ((value >>> 2) & 0x3F);
+      value = ((value | 0xCAFEBABE) & 0x12345678) ^ ((value << 5) - 0x42);
+
+      r_callstack(value);
+    }
+
+    function s_callstack(value){
+      value = value || 0;
+      value = ((value | 0xFACE) ^ (value & 0xBEEF)) + ((value << 4) - 0x123);
+      e_callstack(value);
+    }
+
+    function ee_callstack(value){
+      value = ((value ^ 0xDEADBEEF) >>> 4) + ((value & 0xFF) << 8);
+      //console.log("Intermediate value:", value);
+      t_callstack(value);
+    }
+
+    function e_callstack(value){
+      value = (value + 40) *96
+      value = ((value ^ 0xBADC0DE) * 0x3F) + ((value >>> 1) & 0xFF);
+
+      c_callstack(value);
+    }
+
+    function r_callstack(value){
+      value = ((value * 12345) & 0xFFFF) ^ ((value + 6789) | 0xABCD);
+
+      value = (((value * 31) >>> 3) + 0x1A2B) ^ ((value & 0x7F) << 2);
+      ee_callstack(value);
+    }
+
+    function t_callstack(value){
+      value = ((value + 0x7F) * 97) ^ ((value - 0x3E) & 0x1F);
+      returnCallstack(value);
+    }
+
+    /*
+    // Challenge implementations
+    function startChallenges() {
+      // Challenge 1: Start the timed flag generator
+      setInterval(() => {
+        generateTimedFlag();
+      }, 1000);
+
+      // Challenge 2: Start the data processor
+      setInterval(() => {
+        processData();
+      }, 3000);
+
+      // Challenge 3: Trigger call stack function
+      setInterval(() => {
+        level1(5);
+      }, 2000);
+
+      // Challenge 4: Start complex calculation
+      setInterval(() => {
+        complexCalculation();
+      }, 4000);
+
+      // Challenge 5: Create secret keeper
+      const keeper = createSecretKeeper();
+
+      // Challenge 6: Network debugging (expose function globally)
+      window.fetchSecret = fetchSecret;
+
+      // Challenge 7: Create prototype instance
+      window.instance = new SecretClass(42);
+    }
+
+    // Challenge 1: Timing-based flag
+    function generateTimedFlag() {
+      const timestamp = Date.now();
+      const seed = timestamp % 10000;
+      const flagParts = ['F', 'L', 'A', 'G', '{'];
+
+      for (let i = 0; i < 8; i++) {
+        flagParts.push(String.fromCharCode(65 + (seed + i) % 26));
+      }
+      flagParts.push('}');
+
+      return flagParts.join('');
+    }
+
+    // Challenge 2: Conditional debugging
+    function processData() {
+      for (let i = 0; i < 1000; i++) {
+        const value = Math.floor(Math.random() * 100);
+        const processed = transform(value);
+
+        if (processed === 42) {
+          const secretCode = btoa('HIDDEN_' + i + '_FLAG');
+          console.log('Processing item:', i, 'with secret:', secretCode);
+        }
+      }
+    }
+
+    function transform(x) {
+      return (x * 7 + 13) % 100;
+    }
+
+    // Challenge 3: Call stack inspection
+    function level1(x) {
+      return level2(x + 10);
+    }
+
+    function level2(x) {
+      return level3(x * 2);
+    }
+
+    function level3(x) {
+      const magic = level4(x - 5);
+      return magic;
+    }
+
+    function level4(x) {
+      const callStack = new Error().stack.split('\n').length;
+      const flag = 'FLAG{STACK_' + callStack + '_DEEP}';
+      return x + callStack;
+    }
+
+    // Challenge 4: Watch expressions
+    function complexCalculation() {
+      let a = 7;
+      let b = 13;
+
+      for (let i = 0; i < 5; i++) {
+        a = a * b % 97;
+        b = b + a % 23;
+
+        const xorResult = a ^ b;
+
+        if (i === 3) {
+          console.log('Iteration', i, 'XOR:', xorResult);
+        }
+      }
+    }
+
+    // Challenge 5: Closure secrets
+    function createSecretKeeper() {
+      const secrets = {
+        key1: 'decoy',
+        key2: 'misdirection',
+        hidden: null
+      };
+
+      const computeSecret = () => {
+        const base = 'CLOSURE';
+        const modifier = secrets.key1.length + secrets.key2.length;
+        secrets.hidden = base + '_' + modifier + '_SECRET';
+      };
+
+      computeSecret();
+
+      return {
+        getHint: () => 'Check the closure scope!',
+        dummy: () => secrets.key1 + secrets.key2
+      };
+    }
+
+    // Challenge 6: Network debugging
+    async function fetchSecret() {
+      try {
+        const response = await fetch('/api/secret', {
+          headers: {
+            'X-Secret-Code': btoa('NETWORK_DEBUG_FLAG')
+          }
+        });
+      } catch (error) {
+        console.log('Expected error - check Network tab for headers!');
+      }
+    }
+
+    // Challenge 7: Prototype debugging
+    function SecretClass(id) {
+      this.id = id;
+      this.publicData = 'visible';
+    }
+
+    SecretClass.prototype.getFlag = function() {
+      const encoded = '0x' + (this.id * 1337).toString(16).toUpperCase();
+      return 'PROTO_' + encoded + '_FLAG';
+    };
+     */
+
+  </script>
+</body>
+</html>
